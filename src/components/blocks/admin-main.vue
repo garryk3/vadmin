@@ -3,6 +3,7 @@
       <admin-sidebar @change-view="onEmitChangeView"></admin-sidebar>
       <div class="admin-main__content">
         <admin-create-scheme v-if="view==='creator'"></admin-create-scheme>
+        <admin-template v-if="view==='template'"></admin-template>
       </div>
     </div>
 </template>
@@ -10,6 +11,7 @@
 <script>
 import AdminSidebar from 'blocks/admin-sidebar';
 import AdminCreateScheme from 'blocks/admin-create-scheme';
+import AdminTemplate from 'blocks/admin-template';
 
 export default {
   name: 'admin-main',
@@ -20,12 +22,15 @@ export default {
   },
   methods: {
     onEmitChangeView(view) {
-      this.view = view;
+      if (this.view !== view) {
+        this.view = view;
+      }
     }
   },
   components: {
     'admin-sidebar': AdminSidebar,
-    'admin-create-scheme': AdminCreateScheme
+    'admin-create-scheme': AdminCreateScheme,
+    'admin-template'     : AdminTemplate
   }
 };
 </script>

@@ -48,7 +48,7 @@ export default {
       drawer: true,
       items: [
         { title: 'Редактор шаблонов', icon: 'dashboard', view: 'creator' },
-        { title: 'About', icon: 'question_answer' }
+        { title: 'About', icon: 'question_answer', view: 'template' }
       ],
       mini: true,
       right: null
