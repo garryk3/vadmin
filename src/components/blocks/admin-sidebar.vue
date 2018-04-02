@@ -19,12 +19,21 @@
     </v-toolbar>
     <v-list class="pt-0" dense>
       <v-divider></v-divider>
-      <v-list-tile v-for="item in items" :key="item.title" @click="onClickLink">
+      <v-list-tile
+        v-for="item in items"
+        :key="item.title"
+        class="admin-sidebar__link-wrapper"
+      >
         <v-list-tile-action>
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          <v-list-tile-title
+            :data-name="item.view"
+            @click="onClickLink"
+            class="admin-sidebar__menu-link"
+          >{{ item.title }}
+          </v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
@@ -38,7 +47,7 @@ export default {
     return {
       drawer: true,
       items: [
-        { title: 'Home', icon: 'dashboard' },
+        { title: 'Редактор шаблонов', icon: 'dashboard', view: 'creator' },
         { title: 'About', icon: 'question_answer' }
       ],
       mini: true,
@@ -46,13 +55,22 @@ export default {
     };
   },
   methods: {
-    onClickLink() {
-      console.log('çlick');
+    onClickLink(e) {
+      this.$emit('change-view', e.currentTarget.dataset.name);
     }
   }
 };
 </script>
 
 <style scoped>
-  .admin-sidebar {}
+  .admin-sidebar {
+    &__link-wrapper {
+      cursor: pointer;
+    }
+    &__link {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 </style>

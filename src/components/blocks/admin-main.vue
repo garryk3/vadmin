@@ -1,8 +1,8 @@
 <template>
     <div class="admin-main">
-      <admin-sidebar></admin-sidebar>
+      <admin-sidebar @change-view="onEmitChangeView"></admin-sidebar>
       <div class="admin-main__content">
-        <admin-create-scheme v-if="view='create-scheme'"></admin-create-scheme>
+        <admin-create-scheme v-if="view==='creator'"></admin-create-scheme>
       </div>
     </div>
 </template>
@@ -15,8 +15,13 @@ export default {
   name: 'admin-main',
   data() {
     return {
-      view: 'create-scheme'
+      view: 'creator'
     };
+  },
+  methods: {
+    onEmitChangeView(view) {
+      this.view = view;
+    }
   },
   components: {
     'admin-sidebar': AdminSidebar,
@@ -25,7 +30,7 @@ export default {
 };
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
   .admin-main {
     display: flex;
     height: 100%;
