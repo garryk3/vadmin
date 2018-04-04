@@ -19,7 +19,12 @@
 
 <script>
 export default {
-  name: 'admin-footer'
+  name: 'admin-footer',
+  data() {
+    return {
+      links: ['test']
+    };
+  }
 };
 </script>
 

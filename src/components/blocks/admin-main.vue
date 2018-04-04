@@ -30,7 +30,7 @@ export default {
   components: {
     'admin-sidebar': AdminSidebar,
     'admin-create-scheme': AdminCreateScheme,
-    'admin-template'     : AdminTemplate
+    'admin-template': AdminTemplate
   }
 };
 </script>
