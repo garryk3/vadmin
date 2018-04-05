@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar dark class="admin-header">
+  <v-toolbar dark class="a-header">
     <v-toolbar-side-icon></v-toolbar-side-icon>
     <v-toolbar-title class="white--text">Панель редактора</v-toolbar-title>
     <v-spacer></v-spacer>
@@ -14,10 +14,10 @@
 
 <script>
 export default {
-  name: 'admin-header'
+  name: 'a-header'
 };
 </script>
 
 <style scoped>
-  .admin-header {}
+  .a-header {}
 </style>

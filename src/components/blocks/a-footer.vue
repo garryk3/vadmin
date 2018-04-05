@@ -1,5 +1,5 @@
 <template>
-  <v-footer height="auto" class="admin-footer grey darken-3">
+  <v-footer height="auto" class="a-footer grey darken-3">
     <v-layout row wrap justify-center>
       <v-btn
         color="white"
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: 'admin-footer',
+  name: 'a-footer',
   data() {
     return {
       links: ['test']
@@ -29,5 +29,5 @@ export default {
 </script>
 
 <style scoped>
-  .admin-footer {}
+  .a-footer {}
 </style>

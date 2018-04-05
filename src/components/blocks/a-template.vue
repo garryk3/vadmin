@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'admin-template'
+  name: 'a-template'
 };
 </script>
 

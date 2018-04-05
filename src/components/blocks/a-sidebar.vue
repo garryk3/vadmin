@@ -22,7 +22,7 @@
       <v-list-tile
         v-for="item in items"
         :key="item.title"
-        class="admin-sidebar__link-wrapper"
+        class="a-sidebar__link-wrapper"
       >
         <v-list-tile-action>
           <v-icon>{{ item.icon }}</v-icon>
@@ -31,7 +31,7 @@
           <v-list-tile-title
             :data-name="item.view"
             @click="onClickLink"
-            class="admin-sidebar__menu-link"
+            class="a-sidebar__menu-link"
           >{{ item.title }}
           </v-list-tile-title>
         </v-list-tile-content>
@@ -42,7 +42,7 @@
 
 <script>
 export default {
-  name: 'admin-sidebar',
+  name: 'a-sidebar',
   data() {
     return {
       drawer: true,
@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style scoped>
-  .admin-sidebar {
+  .a-sidebar {
     &__link-wrapper {
       cursor: pointer;
     }
