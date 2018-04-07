@@ -1,13 +1,24 @@
 <template>
   <div class="a-create-scheme">
     <h1 class="headline a-create-scheme__header">Создать шаблон страницы</h1>
-    <v-form v-model="templateValid">
+    <v-alert
+      transition="scale-transition"
+      v-if="successMessage"
+      outline
+      color="success"
+      icon="check_circle"
+      :value="true"
+    >
+      Шаблон успещно сохранен.
+    </v-alert>
+    <v-form v-model="templateValid" ref="form" lazy-validate>
       <v-text-field
         name="header"
         label="Название шаблона"
         id="testing"
         v-model="nameValue"
         :rules="nameValueRules"
+        required
       ></v-text-field>
       <v-select
         :items="elements"
@@ -16,7 +27,34 @@
         single-line
         clearable
       ></v-select>
-      <a-element v-if="selectValue"></a-element>
+      <a-element
+        v-if="selectValue"
+        @close="onCloseElement"
+        @create="onCreateElement"
+      ></a-element>
+      <v-list
+        two-line
+        subheader
+        v-if="scheme.length"
+      >
+        <v-subheader inset>Выбранные поля</v-subheader>
+        <v-list-tile
+          avatar
+          v-for="item in scheme"
+          :key="item.name">
+          <v-list-tile-avatar>
+            <v-icon>info</v-icon>
+          </v-list-tile-avatar>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+      <v-btn
+        @click="onCreateTemplate"
+        :disabled="!templateValid || !scheme.length"
+        class="a-create-scheme__btn-submit"
+      >Создать шаблон</v-btn>
     </v-form>
   </div>
 </template>
@@ -29,6 +67,7 @@ export default {
   data: () => ({
     templateValid: false,
     nameValue: '',
+    successMessage: false,
     selectValue: null,
     nameValueRules: [
       v => !!v || 'Имя обязательно',
@@ -39,9 +78,35 @@ export default {
       'fileInput',
       'textarea'
     ],
-    activeElement: null
+    scheme: [],
+    timeout: null
   }),
-  methods: {},
+  methods: {
+    resetTemplateData() {
+      this.scheme = [];
+      this.selectValue = null;
+      this.$refs.form.reset();
+    },
+    onCloseElement() {
+      this.selectValue = null;
+    },
+    onCreateElement(data) {
+      this.selectValue = null;
+      this.scheme = [...this.scheme, data];
+    },
+    onCreateTemplate() {
+      if (this.templateValid && this.scheme.length) {
+        this.successMessage = true;
+        this.resetTemplateData();
+        this.clearMessage();
+      }
+    },
+    clearMessage() {
+      this.timeout = setTimeout(() => {
+        this.successMessage = false;
+      }, 5000);
+    }
+  },
   components: {
     'a-element': AdminSchemeElement
   }
@@ -56,6 +121,10 @@ export default {
 
     &__header {
       margin: 24px 0;
+    }
+
+    &__btn-submit {
+      margin-top: 40px;
     }
   }
 </style>

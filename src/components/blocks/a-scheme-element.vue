@@ -2,10 +2,10 @@
   <v-card class="a-scheme-element">
     <v-form v-model="elementValid">
       <v-card-title primary-title class="a-scheme-element__body">
-        <h3 class="title">Заполните атрибуты элемента</h3>
+        <h3 class="title">Заполните атрибуты поля</h3>
         <v-text-field
           name="name"
-          label="Название шаблона"
+          label="Название поля"
           id="testing"
           v-model="nameValue"
           :rules="nameValueRules"
@@ -13,7 +13,7 @@
         ></v-text-field>
       </v-card-title>
       <v-card-actions>
-        <v-btn @click="onCreateElement">Создать элемент</v-btn>
+        <v-btn @click="onCreateElement">Добавить поле</v-btn>
         <v-btn @click="onResetElement">Отмена</v-btn>
       </v-card-actions>
     </v-form>
@@ -35,12 +35,16 @@ export default {
     };
   },
   methods: {
-    onCreateElement: () => {
-      console.log('create', this);
-      this.activeElement = [];
+    onCreateElement() {
+      if (this.elementValid) {
+        const values = {
+          name: this.nameValue
+        };
+        this.$emit('create', values);
+      }
     },
-    onResetElement: () => {
-      this.activeElement = [];
+    onResetElement() {
+      this.$emit('close');
     }
   }
 };
