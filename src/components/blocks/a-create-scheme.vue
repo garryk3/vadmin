@@ -96,9 +96,15 @@ export default {
     },
     onCreateTemplate() {
       if (this.templateValid && this.scheme.length) {
+        const schemeData = {
+          [this.nameValue]: this.scheme
+        };
+
         this.successMessage = true;
         this.resetTemplateData();
         this.clearMessage();
+        console.log('store', this.$store, schemeData)
+        // this.$store.commit('saveSchema', schemeData).then(() => { console.log('store', this.$store); });
       }
     },
     clearMessage() {

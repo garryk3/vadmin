@@ -9,9 +9,20 @@ const state = {
 
 const getters = {};
 
-const actions = {};
+const actions = {
+  saveSchema({ commit, data }) {
+    commit('saveSchema', data);
+  }
+};
 
-const mutations = {};
+const mutations = {
+  saveSchema(state, data) {
+    state.schemas = {
+      ...state.schemas,
+      data
+    };
+  }
+};
 
 export default {
   state,
