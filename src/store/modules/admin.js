@@ -1,4 +1,4 @@
-import http from 'blocks/http';
+// import http from 'blocks/http';
 import standartSchema from './schema-standart';
 
 const state = {
@@ -16,10 +16,11 @@ const actions = {
 };
 
 const mutations = {
+  // eslint-disable-next-line
   saveSchema(state, data) {
     state.schemas = {
       ...state.schemas,
-      data
+      ...data
     };
   }
 };
@@ -28,5 +29,5 @@ export default {
   state,
   getters,
   actions,
-  mutations,
+  mutations
 };

@@ -71,7 +71,7 @@ export default {
     selectValue: null,
     nameValueRules: [
       v => !!v || 'Имя обязательно',
-      v => v.length > 1 || 'Не менее 2х символов'
+      v => (v && v.length > 1) || 'Не менее 2х символов'
     ],
     elements: [
       'v-text-field',
@@ -103,8 +103,7 @@ export default {
         this.successMessage = true;
         this.resetTemplateData();
         this.clearMessage();
-        console.log('store', this.$store, schemeData)
-        // this.$store.commit('saveSchema', schemeData).then(() => { console.log('store', this.$store); });
+        this.$store.commit('saveSchema', schemeData);
       }
     },
     clearMessage() {

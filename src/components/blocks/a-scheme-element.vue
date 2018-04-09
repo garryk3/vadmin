@@ -30,7 +30,7 @@ export default {
       nameValue: '',
       nameValueRules: [
         v => !!v || 'Имя обязательно',
-        v => v.length > 1 || 'Не менее 2х символов'
+        v => (v && v.length > 1) || 'Не менее 2х символов'
       ]
     };
   },
