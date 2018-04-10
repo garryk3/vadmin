@@ -69,18 +69,42 @@ export default {
     nameValue: '',
     successMessage: false,
     selectValue: null,
+    createdElementValues: {},
     nameValueRules: [
       v => !!v || 'Имя обязательно',
       v => (v && v.length > 1) || 'Не менее 2х символов'
     ],
     elements: [
-      'v-text-field',
-      'fileInput',
-      'textarea'
+      {
+        value: 'single-text-field',
+        text: 'однострочное текстовое поле'
+      }
     ],
     scheme: [],
     timeout: null
   }),
+  computed: {
+    elementValues() {
+      switch (this.selectValue) {
+        case 'single-text-field': {
+          return {
+            element: 'v-text-field',
+            name: this.createdElementValues.name,
+            attributes: [
+              {
+                name: this.createdElementValues.name,
+                label: this.createdElementValues.name,
+                ...this.createdElementValues.attributes
+              }
+            ]
+          };
+        }
+        default: {
+          return {};
+        }
+      }
+    }
+  },
   methods: {
     resetTemplateData() {
       this.scheme = [];
@@ -91,8 +115,9 @@ export default {
       this.selectValue = null;
     },
     onCreateElement(data) {
+      this.createdElementValues = data;
+      this.scheme = [...this.scheme, this.elementValues];
       this.selectValue = null;
-      this.scheme = [...this.scheme, data];
     },
     onCreateTemplate() {
       if (this.templateValid && this.scheme.length) {

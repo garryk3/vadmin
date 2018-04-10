@@ -38,8 +38,10 @@ export default {
     onCreateElement() {
       if (this.elementValid) {
         const values = {
-          name: this.nameValue
+          name: this.nameValue,
+          attributes: []
         };
+
         this.$emit('create', values);
       }
     },
