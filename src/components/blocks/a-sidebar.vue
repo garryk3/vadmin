@@ -24,23 +24,24 @@
         :key="item.title"
         :prepend-icon="item.action"
         no-action
+        class="a-sidebar__group"
       >
-        <v-list-tile slot="activator">
+        <v-list-tile slot="activator" class="a-sidebar__list-tile">
           <v-list-tile-content>
             <v-list-tile-title>{{ item.title }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile :v-if="item.hasCreateLink">
-          <v-list-tile-action>
-            <v-icon>note add</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Добавить</v-list-tile-title>
-          </v-list-tile-content>
+        <v-list-tile v-if="item.hasCreateLink">
+          <v-icon class="a-sidebar__icon-add">add</v-icon>
+          <v-list-tile-title>
+            Добавить
+          </v-list-tile-title>
         </v-list-tile>
         <v-list-tile class="a-sidebar__subitem" v-for="subItem in item.items" :key="subItem.title">
           <v-list-tile-content>
-            <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
+            <v-list-tile-title class="a-sidebar__subitem-content">
+              {{ subItem.title }}
+            </v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-action>
             <v-icon>{{ subItem.action }}</v-icon>
@@ -59,7 +60,7 @@ export default {
       drawer: true,
       items: [
         {
-          action: 'local_activity',
+          action: 'folder',
           title: 'Категории',
           hasCreateLink: true,
           items: [
@@ -67,7 +68,7 @@ export default {
           ]
         },
         {
-          action: 'restaurant',
+          action: 'settings',
           title: 'Настройки',
           active: true,
           items: [
@@ -90,16 +91,33 @@ export default {
 
 <style scoped>
   .a-sidebar {
+
     &__link-wrapper {
       cursor: pointer;
     }
-    &__subitem {
-      margin-left: 28px;
+
+    &__subitem {}
+
+    &__subitem-content {
+      font-size: 12px;
+      padding-left: 10px;
+      color: #848181;
     }
+
     &__link {
       &:hover {
         text-decoration: underline;
       }
     }
+
+    &__group {
+      &::before,
+      &::after {
+        left: 70px;
+        width: calc(100% - 90px);
+      }
+    }
+
+    &__list-tile {}
   }
 </style>

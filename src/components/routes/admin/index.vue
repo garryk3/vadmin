@@ -2,7 +2,6 @@
    <div class="admin">
      <a-header></a-header>
      <a-main></a-main>
-     <a-footer></a-footer>
    </div>
 </template>
 
