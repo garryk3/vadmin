@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer stateless hide-overlay :mini-variant.sync="mini" v-model="drawer">
+  <v-navigation-drawer permanent>
     <v-toolbar flat class="transparent">
       <v-list class="pa-0">
         <v-list-tile avatar>
@@ -10,9 +10,6 @@
             <v-list-tile-title>John Leider</v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-action>
-            <v-btn icon @click.native.stop="mini = !mini">
-              <v-icon>chevron_left</v-icon>
-            </v-btn>
           </v-list-tile-action>
         </v-list-tile>
       </v-list>
@@ -37,9 +34,17 @@
             Добавить
           </v-list-tile-title>
         </v-list-tile>
-        <v-list-tile class="a-sidebar__subitem" v-for="subItem in item.items" :key="subItem.title">
+        <v-list-tile
+          class="a-sidebar__subitem"
+          v-for="subItem in item.items"
+          :key="subItem.title"
+        >
           <v-list-tile-content>
-            <v-list-tile-title class="a-sidebar__subitem-content">
+            <v-list-tile-title
+              class="a-sidebar__subitem-content"
+              :data-name="subItem.link"
+              @click="onClickLink"
+            >
               {{ subItem.title }}
             </v-list-tile-title>
           </v-list-tile-content>
@@ -72,8 +77,14 @@ export default {
           title: 'Настройки',
           active: true,
           items: [
-            { title: 'Шаблоны' },
-            { title: 'Редактор шаблонов' }
+            {
+              title: 'Шаблоны',
+              link: 'template'
+            },
+            {
+              title: 'Редактор шаблонов',
+              link: 'creator'
+            }
           ]
         }
       ],
@@ -91,17 +102,29 @@ export default {
 
 <style scoped>
   .a-sidebar {
+    flex-shrink: 0;
 
     &__link-wrapper {
       cursor: pointer;
     }
 
-    &__subitem {}
+    &__subitem {
+
+      [class*="list__tile"] {
+        height: 30px;
+      }
+    }
 
     &__subitem-content {
+      height: 30px;
       font-size: 12px;
       padding-left: 10px;
       color: #848181;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     &__link {
